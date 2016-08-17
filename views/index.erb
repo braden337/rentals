@@ -1,2 +1,80 @@
-<h3>Hello <%= @user.name.capitalize %></h3>
-<a href="/logout">logout</a>
+<div class="col-sm-4">
+  <h1><%= @user.name.capitalize %>&rsquo;s Rentals </h1>
+</div>
+
+<div class="col-sm-offset-8" style="padding: 1.5em">
+  <a href="/logout" class="btn btn-danger">Logout</a>
+  <a href="/rental/new" class="btn btn-primary">New Rental</a>
+</div>
+
+
+<!--
+
+<form action="">
+
+<select class="form-control" name="rental_id">
+  <option>Select a Rental</option>
+  <% @rentals.each do |rental| %>
+    <option value="<%= rental.id %>"><%= rental.address %></option>
+  <% end %>
+</select>
+
+</form> -->
+
+<div class="col-sm-12">
+
+<form action="/" method="post">
+
+  <div class="form-group">
+    <label for="rental">Address</label>
+    <select class="form-control" id="rental" name="rental">
+      <!-- <option>Select a Rental</option> -->
+      <% @rentals.each do |rental| %>
+        <option value="<%= rental.id %>"><%= rental.address %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <input type="text" class="form-control" id="amount" placeholder="Amount" name="amount">
+  </div>
+
+  <input type="submit" class="btn btn-default" value="Add Payment">
+</form>
+
+<br>
+
+
+<br>
+<br>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Rental</th>
+      <th>Last Payment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rentals.each do |rental| %>
+    <tr>
+      <td>
+        <a href='/rental/<%= rental.id %>'><%= rental.address %></a>
+      </td>
+      <td>
+        <% if rental.payments.last %>
+          <i><%= money(rental.payments.last.amount)%></i>
+          <%= rental.payments.last.paid_at.strftime(' on %b %d, %Y at %l:%M %p') %>
+        <% else %>
+          <i><%= money(0) %></i>
+        <% end %>
+      </td></tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+
+
+</div>
