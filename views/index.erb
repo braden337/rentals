@@ -57,7 +57,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @rentals.each do |rental| %>
+    <% @rentals.reverse.each do |rental| %>
     <tr>
       <td>
         <a href='/rental/<%= rental.id %>'><%= rental.address %></a>
