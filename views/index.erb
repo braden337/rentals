@@ -1,80 +1,80 @@
-<div class="col-sm-4">
-  <h1><%= @user.name.capitalize %>&rsquo;s Rentals </h1>
-</div>
+<div class="col-xs-12 col-sm-4 col-lg-4 col-lg-offset-4">
 
-<div class="col-sm-offset-8" style="padding: 1.5em">
-  <a href="/logout" class="btn btn-danger">Logout</a>
-  <a href="/rental/new" class="btn btn-primary">New Rental</a>
-</div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <span class="glyphicon glyphicon-usd"></span>
+        New Payment
+      </h3>
+    </div>
+    <div class="panel-body">
+      <form action="/" method="post">
 
+        <div class="form-group">
+          <label for="rental">Rental</label>
+          <select class="form-control" id="rental" name="rental">
+            <!-- <option>Select a Rental</option> -->
+            <% @rentals.each do |rental| %>
+              <option value="<%= rental.id %>"><%= rental.address %></option>
+            <% end %>
+          </select>
+        </div>
 
-<!--
-
-<form action="">
-
-<select class="form-control" name="rental_id">
-  <option>Select a Rental</option>
-  <% @rentals.each do |rental| %>
-    <option value="<%= rental.id %>"><%= rental.address %></option>
-  <% end %>
-</select>
-
-</form> -->
-
-<div class="col-sm-12">
-
-<form action="/" method="post">
-
-  <div class="form-group">
-    <label for="rental">Address</label>
-    <select class="form-control" id="rental" name="rental">
-      <!-- <option>Select a Rental</option> -->
-      <% @rentals.each do |rental| %>
-        <option value="<%= rental.id %>"><%= rental.address %></option>
-      <% end %>
-    </select>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="tel" class="form-control" id="amount" placeholder="Amount" name="amount">
+        </div>
+        <div class="form-group text-right">
+          <input type="submit" class="btn btn-success" value="Add Payment">
+        </div>
+      </form>
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="amount">Amount</label>
-    <input type="text" class="form-control" id="amount" placeholder="Amount" name="amount">
+</div>
+
+
+
+
+<div class="col-xs-12 col-sm-8 col-lg-4 col-lg-offset-4">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <span class="glyphicon glyphicon-stats"></span>
+        Summary
+      </h3>
+    </div>
+    <!-- <div class="panel-body"> -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Rental</th>
+            <th class="text-right">Last Payment
+              <span class="glyphicon glyphicon-triangle-bottom"></span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @rentals.reverse.each do |rental| %>
+          <tr>
+            <td>
+              <a href='/rental/<%= rental.id %>'><%= rental.address %></a>
+            </td>
+            <td class="text-right">
+              <% if rental.payments.last %>
+                <%= rental.payments.last.paid_at.strftime('%b %d') %>
+                <br>
+                <em><%= money(rental.payments.last.amount) %></em>
+              <% else %>
+                <i><%= money(0) %></i>
+              <% end %>
+            </td></tr>
+          <% end %>
+        </tbody>
+
+      </table>
+    <!-- </div> -->
   </div>
-
-  <input type="submit" class="btn btn-default" value="Add Payment">
-</form>
-
-<br>
-
-
-<br>
-<br>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Rental</th>
-      <th>Last Payment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @rentals.reverse.each do |rental| %>
-    <tr>
-      <td>
-        <a href='/rental/<%= rental.id %>'><%= rental.address %></a>
-      </td>
-      <td>
-        <% if rental.payments.last %>
-          <i><%= money(rental.payments.last.amount)%></i>
-          <%= rental.payments.last.paid_at.strftime(' on %b %d, %Y at %l:%M %p') %>
-        <% else %>
-          <i><%= money(0) %></i>
-        <% end %>
-      </td></tr>
-    <% end %>
-  </tbody>
-
-</table>
-
-
 
 </div>

@@ -90,7 +90,8 @@ class RentalApp < Sinatra::Base
     r = Rental.get(p.rental_id)
     r.update(:last_payment => p.paid_at)
     r.save
-    redirect "/rental/#{p.rental_id}"
+    # redirect "/rental/#{p.rental_id}"
+    redirect '/'
   end
 
   post '/rental' do

@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>RentalApp</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <title>Rentals</title>
+  <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
   <style>
     td {
       font-family: monospace;
@@ -12,8 +15,82 @@
   </style>
 </head>
 <body>
+
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#clapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+          <span class="glyphicon glyphicon-home"></span>&nbsp;Rentals
+        </a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="clapse">
+        <!-- <ul class="nav navbar-nav">
+          <li><a href="#">Link</a></li>
+          <li><a href="#">Link</a></li>
+        </ul> -->
+        <!-- <form class="navbar-form navbar-left">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <button type="submit" class="btn btn-default">Submit</button>
+          </div>
+        </form> -->
+        <ul class="nav navbar-nav navbar-right">
+          <% if logged_in? %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Manage<span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/rental/new">New Rental</a></li>
+                <!-- <li><a href="#">Another action</a></li> -->
+                <!-- <li><a href="#">Something else here</a></li> -->
+                <li role="separator" class="divider"></li>
+                <li><a href="/logout">Logout</a></li>
+              </ul>
+            </li>
+          <% else %>
+            <li>
+              <a href="/login">
+                <span class="glyphicon glyphicon-user"></span>&nbsp;Login
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
   <div class="container-fluid">
     <%= yield %>
+    <div class="col-xs-12 text-center">
+      <%= ['built', 'contrived', 'finished',
+          'formed', 'invented', 'manufactured',
+          'shaped', 'made'].sample %>
+      with
+      <span class="glyphicon glyphicon-heart" style="color: rebeccapurple;"></span>
+      by
+      <a href="https://github.com/braden337" style="color: inherit;">
+        <em>@braden337</em>
+      </a>
+    </div>
   </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous">
+  </script>
+  <script src="/main.js"></script>
 </body>
 </html>

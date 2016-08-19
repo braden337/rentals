@@ -10,7 +10,7 @@
   <tbody>
     <% @payments.each do |payment| %>
       <tr>
-        <td><%= payment.paid_at.strftime('%b %d, %Y at %I:%M %p') %></td>
+        <td><%= payment.paid_at.strftime('%b %d, %Y') %></td>
         <td class="text-right"><%= money(payment.amount) %></td>
       </tr>
     <% end %>
@@ -21,5 +21,3 @@
 <div class="text-right">
   <h2 style="font-family: monospace;"><%= money(@sum) %></h2>
 </div>
-
-<a href="/">Home</a>
