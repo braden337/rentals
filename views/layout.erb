@@ -12,6 +12,9 @@
     td {
       font-family: monospace;
     }
+    #footer {
+      padding: 3em 0;
+    }
   </style>
 </head>
 <body>
@@ -46,18 +49,19 @@
         </form> -->
         <ul class="nav navbar-nav navbar-right">
           <% if logged_in? %>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Manage<span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="/rental/new">New Rental</a></li>
+            <li><a href="/logout">Logout</a></li>
+            <!--<li class="dropdown">-->
+            <!--  <a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+            <!--    Manage<span class="caret"></span>-->
+            <!--  </a>-->
+            <!--  <ul class="dropdown-menu">-->
+            <!--    <li><a href="/rental/new">New Rental</a></li>-->
                 <!-- <li><a href="#">Another action</a></li> -->
                 <!-- <li><a href="#">Something else here</a></li> -->
-                <li role="separator" class="divider"></li>
-                <li><a href="/logout">Logout</a></li>
-              </ul>
-            </li>
+            <!--    <li role="separator" class="divider"></li>-->
+            <!--    <li><a href="/logout">Logout</a></li>-->
+            <!--  </ul>-->
+            <!--</li>-->
           <% else %>
             <li>
               <a href="/login">
@@ -72,7 +76,7 @@
 
   <div class="container-fluid">
     <%= yield %>
-    <div class="col-xs-12 text-center">
+    <div id="footer" class="col-xs-12 text-center">
       <%= ['built', 'contrived', 'finished',
           'formed', 'invented', 'manufactured',
           'shaped', 'made'].sample %>
