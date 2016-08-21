@@ -9,15 +9,24 @@ require 'money'
 
 I18n.enforce_available_locales = false
 
-DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/rental.db")
+DataMapper::setup(
+  :default,
+  "sqlite3://#{Dir.pwd}/rental.db"
+)
 
 class User
   include DataMapper::Resource
   include BCrypt
 
   property :id, Serial
-  property :name, String, :required => true, :unique => true
-  property :password_hash, String, :required => true, :length => 60
+  property :name, String, {
+    :required => true,
+    :unique => true
+  }
+  property :password_hash, String, {
+    :required => true,
+    :length => 60
+  }
 
   def password
     @password ||= Password.new(password_hash)
@@ -141,7 +150,9 @@ class RentalApp < Sinatra::Base
 
   get '/rental/:id' do
     @rental = Rental.get(params[:id])
-    redirect '/' unless logged_in? && session[:id] == @rental.user_id
+    unless logged_in? && session[:id] == @rental.user_id
+      redirect '/'
+    end
     @user = User.get(session[:id])
     @payments = @rental.payments
     @sum =  @payments.map{|x| x.amount}.reduce(:+)
