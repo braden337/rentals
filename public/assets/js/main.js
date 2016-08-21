@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   var path = document.location.pathname.match(/\/?(\w+)?\/?.*/)[1];
-  
+
   //
   // Highlight the current page
   //
@@ -11,9 +11,12 @@ $(document).ready(function() {
     if (page == path)
       $(this).parent().addClass('active');
   });
-  
+
   if (path == 'login') {
     $('#name').focus()
+  }
+  else if (path == 'register') {
+    $('#email').focus()
   }
   else {
     $('#amount').focus();

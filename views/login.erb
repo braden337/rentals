@@ -14,7 +14,7 @@
 <!-- <h1>Login</h1> -->
 
 
-<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+<div class="col-sm-4 col-sm-offset-4">
 
 
   <div class="panel panel-default">
@@ -25,16 +25,16 @@
       <form class="form" action="/login" method="post">
         <div class="form-group">
           <label for="name">Username</label>
-          <input type="text" class="form-control" id="name" placeholder="Username" name="name">
+          <input type="text" class="form-control" id="name" placeholder="Username" name="name" required>
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+          <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
         </div>
 
         <div class="form-group">
-          <button type="submit" class="btn btn-success">Sign in</button>
+          <button type="submit" class="btn btn-success">Submit</button>
         </div>
       </form>
     </div>

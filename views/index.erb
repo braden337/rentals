@@ -1,24 +1,17 @@
-<div class="col-xs-12 col-sm-4 col-lg-4 col-lg-offset-4">
+<div class="col-sm-4">
 
   <h3>
     <span class="glyphicon glyphicon-usd"></span>
     New Payment
   </h3>
-  
+
   <div class="panel panel-default">
-    <!--<div class="panel-heading">-->
-    <!--  <h3 class="panel-title">-->
-    <!--    <span class="glyphicon glyphicon-usd"></span>-->
-    <!--    New Payment-->
-    <!--  </h3>-->
-    <!--</div>-->
     <div class="panel-body">
       <form action="/" method="post">
 
         <div class="form-group">
           <label for="rental">Address</label>
           <select class="form-control" id="rental" name="rental">
-            <!-- <option>Select a Rental</option> -->
             <% @rentals.each do |rental| %>
               <option value="<%= rental.id %>"><%= rental.address %></option>
             <% end %>
@@ -44,27 +37,22 @@
 
 
 
-<div class="col-xs-12 col-sm-8 col-lg-4 col-lg-offset-4">
+<div class="col-sm-8">
 
   <h3>
     <span class="glyphicon glyphicon-time"></span>
     Recent
   </h3>
   <div class="panel panel-default">
-    <!--<div class="panel-heading">-->
-    <!--  <h3 class="panel-title">-->
-    <!--    <span class="glyphicon glyphicon-stats"></span>-->
-    <!--    Summary-->
-    <!--  </h3>-->
-    <!--</div>-->
-    <!-- <div class="panel-body"> -->
       <table class="table table-striped">
+
         <thead>
           <tr>
             <th>Address</th>
             <th class="text-right">Paid</th>
           </tr>
         </thead>
+
         <tbody>
           <% @rentals.reverse.each do |rental| %>
           <tr>
@@ -82,7 +70,6 @@
         </tbody>
 
       </table>
-    <!-- </div> -->
   </div>
 
 </div>

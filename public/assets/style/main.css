@@ -1,0 +1,23 @@
+td:last-of-type {
+  font-family: monospace;
+}
+
+#footer {
+  padding: 3em 0;
+}
+
+#footer #pig {
+  color: pink;
+}
+
+#footer #sinatra {
+  color: maroon;
+}
+
+input:invalid {
+  border: 1px solid crimson;
+}
+
+input:valid {
+  border: 1px solid forestgreen;
+}
