@@ -59,13 +59,13 @@ class Rental
 
   property :id, Serial
   property :user_id, Integer, :required => true
-  property :tenant, String
   property :address, String, :required => true
+  property :tenant, String
+  property :rent, Integer
   property :last_payment, DateTime
   property :commercial, Boolean
   property :property_tax_annual, Integer
   property :insurance_annual, Integer
-  property :rent, Integer
 
   belongs_to :user
   has n, :payments
