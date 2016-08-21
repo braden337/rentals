@@ -159,7 +159,7 @@ class RentalApp < Sinatra::Base
     end
     user.save
 
-    gravatar_hash = Digest::MD5.hexdigest(params[:email])}
+    gravatar_hash = Digest::MD5.hexdigest(params[:email])
     conf = Configuration.new(
       user_id: user.id,
       email: params[:email],
