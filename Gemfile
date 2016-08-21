@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 # gem "rails"
 
+gem 'thin'
 gem 'sinatra'
 gem 'data_mapper'
 gem 'dm-sqlite-adapter'
