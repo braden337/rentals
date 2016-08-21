@@ -50,7 +50,7 @@ class Rental
 
   property :id, Serial
   property :user_id, Integer, :required => true
-  property :tenant, String, :required => true
+  property :tenant, String
   property :address, String, :required => true
   property :last_payment, DateTime
   property :commercial, Boolean
