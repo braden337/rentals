@@ -13,11 +13,3 @@ td:last-of-type {
 #footer #sinatra {
   color: maroon;
 }
-
-input:invalid {
-  border: 1px solid crimson;
-}
-
-input:valid {
-  border: 1px solid forestgreen;
-}

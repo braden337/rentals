@@ -9,25 +9,30 @@
       <form action="/" method="post">
 
         <div class="form-group">
-          <label for="rental">Address</label>
+          <label for="rental">Tenant</label>
           <select class="form-control" id="rental" name="rental">
-            <% @rentals.each do |rental| %>
-              <option value="<%= rental.id %>"><%= rental.address %></option>
+            <% unless @rentals.empty? %>
+              <% @rentals.each do |rental| %>
+                <option value="<%= rental.id %>"><%= rental.address %></option>
+              <% end %>
+            <% else %>
+              <option>None</option>
             <% end %>
           </select>
         </div>
 
         <div class="form-group">
           <label for="amount">Amount</label>
-          <input type="tel" class="form-control" id="amount" placeholder="Amount" name="amount">
+          <input type="number" class="form-control" id="amount" placeholder="Amount" name="amount">
         </div>
+        <%# binding.pry %>
         <div class="form-group text-right">
           <input type="submit" class="btn btn-success" value="Add Payment">
         </div>
       </form>
     </div> <!-- panel-body -->
     <div class="panel-footer text-center">
-      <a href="/rental/new">New Rental</a>
+      <a href="/rental/new">New Property</a>
     </div>
   </div>
 
@@ -44,27 +49,30 @@
 
         <thead>
           <tr>
-            <th>Address</th>
+            <th>Property</th>
             <th class="text-right">Paid</th>
           </tr>
         </thead>
 
         <tbody>
-          <% @rentals.reverse.each do |rental| %>
-          <tr>
-            <td>
-              <a href='/rental/<%= rental.id %>'><%= rental.address %></a>
-            </td>
-            <td class="text-right">
-              <% if rental.payments.last %>
-                <%= rental.payments.last.paid_at.strftime('%b %d') %><br><em><%= money(rental.payments.last.amount) %></em>
-              <% else %>
-                <i><%= money(0) %></i>
-              <% end %>
-            </td></tr>
+          <% unless @rentals.empty? %>
+            <% @rentals.reverse.each do |rental| %>
+            <tr>
+              <td>
+                <a href='/rental/<%= rental.id %>'><%= rental.address %></a>
+              </td>
+              <td class="text-right">
+                <% if rental.payments.last %>
+                  <%= rental.payments.last.paid_at.strftime('%b %d') %><br><em><%= money(rental.payments.last.amount) %></em>
+                <% else %>
+                  <i><%= money(0) %></i>
+                <% end %>
+              </td></tr>
+            <% end %>
+          <% else %>
+            <tr><td>You don't have any properties, <a href="/rental/new">create one</a></td><td class="text-right">$0.00</td></tr>
           <% end %>
         </tbody>
-
       </table>
   </div>
 

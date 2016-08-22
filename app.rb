@@ -117,6 +117,7 @@ class RentalApp < Sinatra::Base
       @rentals = @user.rentals.all(
         :order => [ :last_payment ]
       )
+      # binding.pry
       erb :index
     end
   end
@@ -136,6 +137,7 @@ class RentalApp < Sinatra::Base
   end
 
   post '/rental' do
+    # binding.pry
     Rental.create(
       :user_id => session[:id],
       :address => params[:address]
@@ -145,7 +147,7 @@ class RentalApp < Sinatra::Base
 
   get '/rental/new' do
     @user = User.get(session[:id])
-    erb :'rentals/new'
+    erb :'rental/new'
   end
 
   get '/rental/:id' do
@@ -156,7 +158,7 @@ class RentalApp < Sinatra::Base
     @user = User.get(session[:id])
     @payments = @rental.payments
     @sum =  @payments.map{|x| x.amount}.reduce(:+)
-    erb :'rentals/show'
+    erb :'rental/show'
   end
 
   get '/register' do

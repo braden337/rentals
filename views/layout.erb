@@ -42,15 +42,15 @@
         </form> -->
         <ul class="nav navbar-nav navbar-right">
           <% if logged_in? %>
-            <li class="dropdown text-right" id="gravatar">
+            <li class="dropdown" id="gravatar">
              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                <img src="<%= @user.configuration.gravatar %>" style="height: 18px; vertical-align: middle;" alt="user avatar">
                <%= @user.name %><span class="caret"></span>
              </a>
              <ul class="dropdown-menu">
-               <li class="text-right"><a href="/user/settings">Settings</a></li>
+               <li><a href="/user/settings">Settings</a></li>
                <li role="separator" class="divider"></li>
-               <li class="text-right"><a href="/logout">Logout</a></li>
+               <li><a href="/logout">Logout</a></li>
              </ul>
             </li>
           <% else %>
@@ -73,7 +73,7 @@
           'formed', 'invented', 'manufactured',
           'shaped', 'made'].sample %>
       <span class="glyphicon glyphicon-piggy-bank" id="pig"></span>
-      Created with <a href="http://sinatrarb.com">Sinatra.rb</a>
+      Created with <a href="http://sinatrarb.com" id="sinatra">Sinatra.rb</a>
       by <a href="https://github.com/braden337"><em>braden337</em></a>
     </div>
   </div>

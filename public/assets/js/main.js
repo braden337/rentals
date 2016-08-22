@@ -1,10 +1,7 @@
 $(document).ready(function() {
 
-  var path = document.location.pathname.match(/\/?(\w+)?\/?.*/)[1];
+  var path = document.location.pathname.match(/\/?(\w+)?\/?.*/)[1] || '';
 
-  //
-  // Highlight the current page
-  //
   $('.navbar-nav li a').each(function() {
     var page = $(this).text().toLowerCase().trim();
     // console.log(text, text == path);
@@ -12,14 +9,41 @@ $(document).ready(function() {
       $(this).parent().addClass('active');
   });
 
-  if (path == 'login') {
-    $('#name').focus()
+  // switch (path) {
+  //   case expression:
+  //
+  //     break;
+  //   default:
+  //
+  // }
+  // if (path == 'login') {
+  //   $('#name').focus()
+  // }
+  // else if (path == 'register') {
+  //   $('#email').focus()
+  // }
+  // else {
+  //   $('#amount').focus();
+  // }
+
+  function checkIndex() {
+    if ($('#amount').val() && $('#rental').val() !== 'None') {
+      return true;
+    }
+    else {
+      // alert('something went wrong');
+      return false;
+    }
   }
-  else if (path == 'register') {
-    $('#email').focus()
-  }
-  else {
-    $('#amount').focus();
-  }
+
+  $('form').submit(function(e) {
+    switch (path) {
+      case '':
+        return checkIndex();
+        break;
+    }
+  });
+
+
 
 });

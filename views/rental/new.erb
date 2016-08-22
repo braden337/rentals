@@ -1,0 +1,50 @@
+<!-- <h1>New Rental</h1>
+<form action="/rental" method="post">
+
+  <div class="form-group">
+    <label for="address">Address</label>
+    <input type="text" class="form-control" id="address" name="address">
+  </div>
+
+  <input type="submit" class="btn btn-default" value="Create New Rental">
+</form> -->
+
+
+<div class="col-sm-4 col-sm-offset-4">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">New Property</h3>
+    </div>
+    <div class="panel-body">
+      <form class="form" action="/rental" method="post">
+
+        <div class="form-group">
+          <label for="tenant">Tenant</label>
+          <input type="text" class="form-control" id="tenant" name="tenant">
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" id="address" name="address">
+        </div>
+
+        <div class="form-group">
+          <label for="rent">Monthly Rent</label>
+          <input type="number" class="form-control" id="rent" name="rent">
+        </div>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="commercial"> Commercial property?
+          </label>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
