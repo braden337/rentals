@@ -3,7 +3,7 @@ require 'data_mapper'
 require 'dm-sqlite-adapter'
 require 'bcrypt'
 require 'pry'
-require 'SecureRandom'
+require 'securerandom'
 require 'yaml/store'
 require 'money'
 
