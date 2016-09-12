@@ -36,14 +36,40 @@ $(document).ready(function() {
     }
   }
 
+  function checkRental() {
+    var tenant = $('#tenant').val();
+    var address = $('#address').val();
+    var rent = $('#rent').val();
+    var is_commercial = $('#commercial').prop('checked');
+    var tax = $('#tax').val();
+    var insurance = $('#rent').val();
+
+    if (tenant && address && rent > 0) {
+      if (is_commercial) {
+        return (tax && insurance) ? true : false;
+      }
+      else {
+        return true;
+      }
+    }
+    
+  }
+
   $('form').submit(function(e) {
     switch (path) {
       case '':
         return checkIndex();
         break;
+      case 'rental':
+        return checkRental();
+        break;
     }
   });
 
+
+  $('#commercial').on('change', function() {
+    $('#commercial_info').toggleClass('hidden');
+  });
 
 
 });

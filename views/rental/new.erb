@@ -36,8 +36,22 @@
 
         <div class="checkbox">
           <label>
-            <input type="checkbox" name="commercial"> Commercial property?
+            <input type="checkbox" id="commercial" value="commercial" name="commercial"> Commercial property?
           </label>
+        </div>
+
+        <div id="commercial_info" class="hidden">
+
+          <div class="form-group">
+            <label for="tax">Property Tax Annual</label>
+            <input type="number" class="form-control" id="tax" name="tax">
+          </div>
+
+          <div class="form-group">
+            <label for="insurance">Insurance Annual</label>
+            <input type="number" class="form-control" id="insurance" name="insurance">
+          </div>
+
         </div>
 
         <div class="form-group">

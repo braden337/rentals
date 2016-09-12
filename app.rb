@@ -19,14 +19,8 @@ class User
   include BCrypt
 
   property :id, Serial
-  property :name, String, {
-    :required => true,
-    :unique => true
-  }
-  property :password_hash, String, {
-    :required => true,
-    :length => 60
-  }
+  property :name, String, :required => true, :unique => true
+  property :password_hash, String, :required => true, :length => 60
 
   def password
     @password ||= Password.new(password_hash)
@@ -46,7 +40,6 @@ class Configuration
   include DataMapper::Resource
 
   property :id, Serial
-  property :user_id, Integer
   property :email, String
   property :gravatar, String, :length => 60
   property :tax, Integer
@@ -58,14 +51,13 @@ class Rental
   include DataMapper::Resource
 
   property :id, Serial
-  property :user_id, Integer, :required => true
   property :address, String, :required => true
-  property :tenant, String
-  property :rent, Integer
-  property :last_payment, DateTime
-  property :commercial, Boolean
+  property :tenant, String, :required => true
+  property :rent, Integer, :required => true
+  property :commercial, Boolean, :required => true
   property :property_tax_annual, Integer
   property :insurance_annual, Integer
+  property :last_payment, DateTime
 
   belongs_to :user
   has n, :payments
@@ -78,7 +70,6 @@ class Payment
   property :id, Serial
   property :amount, Integer, :required => true
   property :paid_at, DateTime, :required => true
-  property :rental_id, Integer, :required => true
 
   belongs_to :rental
 
@@ -101,13 +92,19 @@ class RentalApp < Sinatra::Base
     def logged_in?
       !!session[:id]
     end
+
     def money(amount)
       Money.new(amount, 'CAD').format
     end
+
     def dollars_to_cents(dollars)
       (dollars.to_f*100).to_i
     end
   end
+
+  # \-----------------------------------------------------------------------/
+  # \------------------------------ROUTES-----------------------------------/
+  # \-----------------------------------------------------------------------/
 
   get '/' do
     unless logged_in?
@@ -117,7 +114,6 @@ class RentalApp < Sinatra::Base
       @rentals = @user.rentals.all(
         :order => [ :last_payment ]
       )
-      # binding.pry
       erb :index
     end
   end
@@ -132,12 +128,14 @@ class RentalApp < Sinatra::Base
     r = Rental.get(p.rental_id)
     r.update(:last_payment => p.paid_at)
     r.save
-    # redirect "/rental/#{p.rental_id}"
     redirect '/'
   end
 
+  # \-----------------------------------------------------------------------/
+  # \---------------------------RENTAL-ROUTES-------------------------------/
+  # \-----------------------------------------------------------------------/
+
   post '/rental' do
-    # binding.pry
     Rental.create(
       :user_id => session[:id],
       :address => params[:address]
@@ -161,8 +159,37 @@ class RentalApp < Sinatra::Base
     erb :'rental/show'
   end
 
+  # \-----------------------------------------------------------------------/
+  # \-----------------------------USER-ROUTES-------------------------------/
+  # \-----------------------------------------------------------------------/
+
+  get '/login' do
+    unless logged_in?
+      erb :login
+    else
+      redirect '/'
+    end
+  end
+
+  post '/login' do
+    user = User.first(name: params[:name])
+    if user.password == params[:password]
+      session[:id] = user.id
+    end
+    redirect '/'
+  end
+
+  get '/logout' do
+    session.clear
+    redirect '/'
+  end
+  
   get '/register' do
-    erb :register
+    unless logged_in?
+      erb :register
+    else
+      redirect '/'
+    end
   end
 
   post '/register' do
@@ -184,21 +211,5 @@ class RentalApp < Sinatra::Base
     redirect '/'
   end
 
-  get '/login' do
-    erb :login
-  end
-
-  post '/login' do
-    user = User.first(name: params[:name])
-    if user.password == params[:password]
-      session[:id] = user.id
-    end
-    redirect '/'
-  end
-
-  get '/logout' do
-    session.clear
-    redirect '/'
-  end
 
 end
