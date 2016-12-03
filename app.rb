@@ -138,7 +138,9 @@ class RentalApp < Sinatra::Base
   post '/rental' do
     Rental.create(
       :user_id => session[:id],
-      :address => params[:address]
+      :tenant => session[:tenant],
+      :address => params[:address],
+      :rent => params[:rent],
     )
     redirect '/'
   end
